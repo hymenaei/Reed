@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Titlebar } from './components/Titlebar'
 import { EditorPane, type EditorHandle } from './components/Editor'
 import { CommandPalette } from './components/CommandPalette'
-import { RecentsRail } from './components/RecentsRail'
 import { DropZone } from './components/DropZone'
 import { EmptyState } from './components/EmptyState'
 import { useEditorStore } from './store/editor-store'
@@ -35,15 +34,19 @@ export default function App() {
       setPrefs(prefs)
       const recents = await window.api.listRecents()
       setRecents(recents)
-      // Restore last-opened file if it still exists
+      // Restore last-opened file if it still exists; otherwise open an
+      // untitled file so the app always starts with a document open.
+      let opened = false
       if (prefs.lastOpenPath) {
         try {
           const fc = await window.api.readFile(prefs.lastOpenPath)
           openFileContent(fc)
+          opened = true
         } catch {
-          // File no longer exists — ignore
+          // File no longer exists — fall through to newFile
         }
       }
+      if (!opened) newFile()
     })()
 
     // Listen for open-file requests from main (drag-drop on Linux/macOS
@@ -244,10 +247,8 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen w-screen bg-bg-base">
       <Titlebar
-        onToggleTheme={() => void toggleTheme()}
         onToggleReaderMode={toggleReaderMode}
         onOpenPalette={() => setPaletteOpen(true)}
-        onOpenRecents={openRecents}
         readerMode={readerMode}
       />
 
@@ -271,11 +272,6 @@ export default function App() {
             onNewFile={newFile}
           />
         )}
-
-        <RecentsRail
-          onOpenFile={(path) => void openPath(path)}
-          onClose={() => {}}
-        />
       </div>
 
       {/* Drop zone covers entire window */}

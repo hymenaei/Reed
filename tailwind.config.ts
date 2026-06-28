@@ -9,8 +9,8 @@ const config: Config = {
         // Dark theme inspired by miguelsolorio/min-theme
         // Near-black backgrounds, muted warm-gray surfaces
         bg: {
-          base: '#0d0d0d',
-          surface: '#111111',
+          base: '#1f1f1f',
+          surface: '#1f1f1f',
           raised: '#161616',
           hover: '#1c1c1c',
           active: '#222222'

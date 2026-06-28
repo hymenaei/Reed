@@ -30,7 +30,7 @@ export function createMainWindow(): BrowserWindow {
     height: state.height,
     minWidth: 560,
     minHeight: 400,
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#1f1f1f',
     frame: false, // Frameless — custom titlebar
     titleBarStyle: 'hidden',
     autoHideMenuBar: true,
