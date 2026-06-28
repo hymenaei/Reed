@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ────────────────────────────────────────────────────────────────────
+   Base — dark theme, no scrollbars unless hovered, system font fallback
+   ──────────────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  body {
+    background: #0d0d0d;
+    color: #e8e6e3;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    user-select: none;
+    cursor: default;
+  }
+
+  /* Hide scrollbars until hover — Raycast-style */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 4px;
+    transition: background 140ms ease;
+  }
+  *:hover > ::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2a;
+  }
+  /* Show on hover for scrollable surfaces */
+  .scroll-y {
+    overflow-y: auto;
+  }
+  .scroll-y:hover::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+  }
+
+  ::selection {
+    background: rgba(212, 163, 115, 0.24);
+    color: #f5f3f0;
+  }
+
+  /* Drag region for custom titlebar */
+  .drag-region {
+    -webkit-app-region: drag;
+  }
+  .no-drag {
+    -webkit-app-region: no-drag;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   TipTap editor — Notion-calm typography for GFM content
+   ──────────────────────────────────────────────────────────────────── */
+@layer components {
+  .ProseMirror {
+    @apply text-ink-high;
+    font-size: 15px;
+    line-height: 1.7;
+    outline: none;
+    caret-color: #d4a373;
+  }
+
+  .ProseMirror > * + * {
+    margin-top: 0.75em;
+  }
+
+  .ProseMirror h1 {
+    @apply text-2xl font-semibold text-ink-high tracking-tight;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.25;
+  }
+  .ProseMirror h2 {
+    @apply text-xl font-semibold text-ink-high tracking-tight;
+    margin-top: 1.4em;
+    margin-bottom: 0.4em;
+    line-height: 1.3;
+  }
+  .ProseMirror h3 {
+    @apply text-lg font-semibold text-ink-high;
+    margin-top: 1.2em;
+    margin-bottom: 0.3em;
+  }
+  .ProseMirror h4 {
+    @apply text-base font-semibold text-ink-high;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+
+  .ProseMirror p {
+    margin: 0.5em 0;
+  }
+
+  .ProseMirror a {
+    color: #d4a373;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(212, 163, 115, 0.4);
+  }
+  .ProseMirror a:hover {
+    text-decoration-color: #d4a373;
+  }
+
+  .ProseMirror strong {
+    @apply font-semibold text-ink-high;
+  }
+  .ProseMirror em {
+    font-style: italic;
+  }
+  .ProseMirror code {
+    @apply text-[0.85em] font-mono;
+    background: #1c1c1c;
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: #e0b384;
+  }
+
+  .ProseMirror pre {
+    @apply font-mono text-[13px] my-4 p-4 rounded-md;
+    background: #0a0a0a;
+    border: 1px solid #1f1f1f;
+    overflow-x: auto;
+  }
+  .ProseMirror pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* lowlight / highlight.js token colors (warm-accent palette) */
+  .ProseMirror .hljs-comment,
+  .ProseMirror .hljs-quote {
+    color: #6b6660;
+    font-style: italic;
+  }
+  .ProseMirror .hljs-keyword,
+  .ProseMirror .hljs-selector-tag,
+  .ProseMirror .hljs-built_in {
+    color: #d4a373;
+  }
+  .ProseMirror .hljs-string,
+  .ProseMirror .hljs-attr,
+  .ProseMirror .hljs-template-tag {
+    color: #a3b18a;
+  }
+  .ProseMirror .hljs-number,
+  .ProseMirror .hljs-literal {
+    color: #e0b384;
+  }
+  .ProseMirror .hljs-title,
+  .ProseMirror .hljs-section,
+  .ProseMirror .hljs-name {
+    color: #e8e6e3;
+    font-weight: 600;
+  }
+  .ProseMirror .hljs-variable,
+  .ProseMirror .hljs-attribute {
+    color: #c9a87c;
+  }
+
+  .ProseMirror blockquote {
+    border-left: 2px solid #2a2a2a;
+    padding-left: 1em;
+    color: #a8a39d;
+    font-style: italic;
+    margin: 0.75em 0;
+  }
+
+  .ProseMirror ul,
+  .ProseMirror ol {
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+  }
+  .ProseMirror ul {
+    list-style: disc;
+  }
+  .ProseMirror ol {
+    list-style: decimal;
+  }
+  .ProseMirror li {
+    margin: 0.2em 0;
+  }
+  .ProseMirror li::marker {
+    color: #6b6660;
+  }
+
+  /* Task lists */
+  .ProseMirror ul[data-type='taskList'] {
+    list-style: none;
+    padding-left: 0;
+  }
+  .ProseMirror ul[data-type='taskList'] li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  .ProseMirror ul[data-type='taskList'] li > label {
+    flex-shrink: 0;
+    user-select: none;
+    margin-top: 0.2em;
+  }
+  .ProseMirror ul[data-type='taskList'] li > div {
+    flex: 1;
+  }
+
+  /* Tables — GFM */
+  .ProseMirror table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+    overflow: hidden;
+  }
+  .ProseMirror th,
+  .ProseMirror td {
+    border: 1px solid #1f1f1f;
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .ProseMirror th {
+    background: #161616;
+    font-weight: 600;
+    color: #e8e6e3;
+  }
+  .ProseMirror td {
+    color: #c9c5be;
+  }
+  .ProseMirror .selectedCell {
+    background: rgba(212, 163, 115, 0.08);
+  }
+
+  .ProseMirror hr {
+    border: none;
+    border-top: 1px solid #1f1f1f;
+    margin: 2em 0;
+  }
+
+  .ProseMirror img {
+    max-width: 100%;
+    border-radius: 6px;
+  }
+
+  /* Placeholder when empty */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: #45413c;
+    pointer-events: none;
+    float: left;
+    height: 0;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   Custom titlebar + window chrome
+   ──────────────────────────────────────────────────────────────────── */
+@layer components {
+  .titlebar-btn {
+    @apply inline-flex items-center justify-center w-[28px] h-[28px] text-ink-mid transition-colors duration-instant;
+    -webkit-app-region: no-drag;
+  }
+  .titlebar-btn:hover {
+    @apply bg-bg-hover text-ink-high;
+  }
+  .titlebar-btn:active {
+    @apply bg-bg-active;
+  }
+  .titlebar-btn.is-close:hover {
+    @apply bg-[#e81123] text-white;
+  }
+
+  .icon-btn {
+    @apply inline-flex items-center justify-center w-7 h-7 rounded text-ink-mid transition-all duration-instant;
+  }
+  .icon-btn:hover {
+    @apply bg-bg-hover text-ink-high;
+  }
+  .icon-btn:active {
+    @apply scale-95;
+  }
+
+  .kbd {
+    @apply inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-xs text-[10px] font-mono text-ink-low bg-bg-raised border border-line;
+  }
+}
