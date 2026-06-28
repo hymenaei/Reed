@@ -1,32 +1,32 @@
-appId: com.z.markdowneditor
-productName: Markdown Editor
+appId: com.z.reed
+productName: Reed
 copyright: Copyright © 2026
 directories:
-  buildResources: build
-  output: dist
+    buildResources: build
+    output: dist
 files:
-  - '!**/.vscode/*'
-  - '!src/*'
-  - '!electron.vite.config.{js,ts,mjs,cjs}'
-  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
-  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml,yarn.lock}'
-  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+    - '!**/.vscode/*'
+    - '!src/*'
+    - '!electron.vite.config.{js,ts,mjs,cjs}'
+    - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+    - '!{.env,.env.*,.npmrc,pnpm-lock.yaml,yarn.lock}'
+    - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
-  - resources/**
+    - resources/**
 win:
-  target:
-    - target: nsis
-      arch:
-        - x64
-  artifactName: ${productName}-Setup-${version}.${ext}
+    target:
+        - target: nsis
+          arch:
+              - x64
+    artifactName: ${productName}-Setup-${version}.${ext}
 nsis:
-  oneClick: false
-  perMachine: false
-  allowElevation: true
-  allowToChangeInstallationDirectory: true
-  createDesktopShortcut: true
-  createStartMenuShortcut: true
-  shortcutName: ${productName}
-  deleteAppDataOnUninstall: false
-  showProgressOnUninstall: true
-  uninstallDisplayName: ${productName}
+    oneClick: false
+    perMachine: false
+    allowElevation: true
+    allowToChangeInstallationDirectory: true
+    createDesktopShortcut: true
+    createStartMenuShortcut: true
+    shortcutName: ${productName}
+    deleteAppDataOnUninstall: false
+    showProgressOnUninstall: true
+    uninstallDisplayName: ${productName}

@@ -1,4 +1,4 @@
-# Markdown Editor
+# Reed
 
 A minimal Windows-only Markdown viewer/editor built on **Electron + React + TipTap + electron-vite**.
 
@@ -11,14 +11,14 @@ A minimal Windows-only Markdown viewer/editor built on **Electron + React + TipT
 
 ## Architecture decisions
 
-| Concern | Decision |
-|---|---|
-| Storage model | Recents only — no vault concept. Drag-and-drop is the primary open method; a slim rail button on the left edge opens a Recents popover. |
-| Doc format | Markdown round-trip. `.md` files on disk, TipTap JSON ↔ GFM via `tiptap-markdown`. |
+| Concern       | Decision                                                                                                                                                                   |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Storage model | Recents only — no vault concept. Drag-and-drop is the primary open method; a slim rail button on the left edge opens a Recents popover.                                    |
+| Doc format    | Markdown round-trip. `.md` files on disk, TipTap JSON ↔ GFM via `tiptap-markdown`.                                                                                         |
 | Palette scope | Raycast-style everything: recent files + file ops + editor commands (bold, insert table, etc.) + app commands (theme, reader mode, reload). Fuzzy match with highlighting. |
-| Side panels | None. Editor + palette only — maximum focus mode. |
-| Titlebar | Mac-Typora-style frameless bar: file name (left), word/char/read-time stats (center), action buttons + Windows min/max/close (right). No bottom status bar. |
-| Distribution | NSIS installer via electron-builder. |
+| Side panels   | None. Editor + palette only — maximum focus mode.                                                                                                                          |
+| Titlebar      | Mac-Typora-style frameless bar: file name (left), word/char/read-time stats (center), action buttons + Windows min/max/close (right). No bottom status bar.                |
+| Distribution  | NSIS installer via electron-builder.                                                                                                                                       |
 
 ## Project layout
 
@@ -92,19 +92,19 @@ Outputs an NSIS installer under `dist/Markdown Editor-Setup-0.1.0.exe`.
 
 ## Keyboard shortcuts
 
-| Shortcut | Action |
-|---|---|
-| `Ctrl+K` | Toggle command palette |
-| `Ctrl+R` | Toggle recents popover |
-| `Ctrl+O` | Open file dialog |
-| `Ctrl+N` | New untitled file |
-| `Ctrl+S` | Save (Save As if new) |
-| `Ctrl+Shift+S` | Save As |
-| `Ctrl+B` | Bold |
-| `Ctrl+I` | Italic |
-| `Ctrl+Z` / `Ctrl+Y` | Undo / Redo |
-| `Ctrl+Shift+R` | Reload window |
-| `Esc` | Close palette / popover |
+| Shortcut            | Action                  |
+| ------------------- | ----------------------- |
+| `Ctrl+K`            | Toggle command palette  |
+| `Ctrl+R`            | Toggle recents popover  |
+| `Ctrl+O`            | Open file dialog        |
+| `Ctrl+N`            | New untitled file       |
+| `Ctrl+S`            | Save (Save As if new)   |
+| `Ctrl+Shift+S`      | Save As                 |
+| `Ctrl+B`            | Bold                    |
+| `Ctrl+I`            | Italic                  |
+| `Ctrl+Z` / `Ctrl+Y` | Undo / Redo             |
+| `Ctrl+Shift+R`      | Reload window           |
+| `Esc`               | Close palette / popover |
 
 ## Features
 
